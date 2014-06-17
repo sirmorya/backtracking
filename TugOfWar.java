@@ -1,9 +1,10 @@
 package backtracking;
 
 public class TugOfWar {
-
+	 
+	int minDiff = Integer.MAX_VALUE;
 	
-	void TOWUtil(int[] a, int n, boolean[] currElements, int noOfElements, boolean[] sol, int minDiff, int sum, int currSum, int currPos){
+	void TOWUtil(int[] a, int n, boolean[] currElements, int noOfElements, boolean[] sol, int sum, int currSum, int currPos){
 		
 		if(currPos == n)
 			return;
@@ -12,7 +13,7 @@ public class TugOfWar {
 			return;
 		
 		// considers the case when teh current element isn't included in the solution
-		TOWUtil(a, n, currElements, noOfElements, sol, minDiff, sum, currSum, currPos+1);
+		TOWUtil(a, n, currElements, noOfElements, sol, sum, currSum, currPos+1);
 		
 		//Add current element to the solution
 		noOfElements ++;
@@ -28,7 +29,7 @@ public class TugOfWar {
 			}
 		}else{
 			//Include the current element
-			TOWUtil(a, n, currElements, noOfElements, sol, minDiff, sum, currSum, currPos+1);
+			TOWUtil(a, n, currElements, noOfElements, sol, sum, currSum, currPos+1);
 		}
 		currElements[currPos] = false;
 	}
@@ -48,12 +49,13 @@ public class TugOfWar {
 			currElements[i] = sol[i] = false;
 		}
 		
-		TOWUtil(a, n, currElements, 0, sol, 9999, sum, 0, 0);
+		TOWUtil(a, n, currElements, 0, sol, sum, 0, 0);
 		
 		System.out.println("First Subset is : ");
 		for(int i = 0; i < n; i++)
 			if(sol[i])
 			System.out.print(a[i]+"\t");
+		System.out.println();
 		System.out.println("second Subset is : ");
 		for(int i = 0; i < n; i++)
 			if(!sol[i])
